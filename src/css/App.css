@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.appContainer {
+  height: 75vh;
+}
+
+.quoteContent {
+  font-size: 1.634rem;
+  font-family: "Lora", serif;
+  font-style: italic;
+}
+
+.quoteContainer {
+  margin-top: 80px;
+}
