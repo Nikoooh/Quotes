@@ -8,9 +8,9 @@ interface Props {
 const Quote : React.FC<Props> = ({ quote }): React.ReactElement => {
   if (!quote) return <div/>
   return (
-    <div>
-      <p className='quoteContent'>''{quote.content}''</p>
-      <p className='quoteContent'>- {quote.author}</p>
+    <div className='quoteContent'>
+      <p>''{quote.content}''</p>
+      <p>- {quote.author}</p>
     </div>
   )
 }
