@@ -2,44 +2,52 @@ import { useState } from 'react'
 import './css/App.css'
 import { getQuote } from './services/quoteService'
 import Quote from './components/Quote'
-import { Backdrop, CircularProgress } from '@mui/material'
-import { filterQuote } from './utils/helperFunctions'
+import Loading from './components/Loading'
 
-export interface QuoteType {
-  author: String,
-  content: String,
-  tags: Array<String>
+export interface Error {
+  errorMessage: string
 }
 
-const App = () => {
+export interface QuoteData {
+  author: string,
+  content: string,
+}
 
-  const [quote, setQuote] = useState<QuoteType>()
+const App: React.FC = (): React.ReactElement => {
+
+  const [quote, setQuote] = useState<QuoteData>({author: '', content: ''})
   const [backdropOpen, setBackdropOpen] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
   
   const handleClick = async () => {
-    try {
-      setBackdropOpen(true)
-      const request = await getQuote()
-      if (request.status === 200) {
-        setQuote(filterQuote(request.data))
-        setBackdropOpen(false)
+    
+    setError('')
+    setQuote({author: '', content: ''})
+    setBackdropOpen(true)
+    
+    const request = await getQuote()
+     
+    if (request.status === 200) {
+      if ('author' in request.data && 'content' in request.data) {
+        setQuote(request.data);
       }
-    } catch (error) {
-      console.log(error);  
-      setBackdropOpen(false)   
+      setBackdropOpen(false);
+    } else if (request.status === 400) {
+      if ('errorMessage' in request.data) {
+        setError(request.data.errorMessage);
+      }
+      setBackdropOpen(false);
     }
   }
 
   return (
     <div className='appContainer'>
-      <h1>Random Quote Generator</h1>
-      <button onClick={handleClick}>Get Quote</button>
-      <div className='quoteContainer'>  
-        <Quote quote={quote}/>
-        <Backdrop open={backdropOpen}>
-          <CircularProgress />
-        </Backdrop>
-      </div>
+      <h1 className='header'>Random Quote Generator</h1>
+      <button onClick={handleClick}>Get Quote</button>   
+
+      <Quote quote={quote} error={error}/>
+
+      <Loading open={backdropOpen}/>
     </div>
   )
 
