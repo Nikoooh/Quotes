@@ -3,15 +3,7 @@ import './css/App.css'
 import { getQuote } from './services/quoteService'
 import Quote from './components/Quote'
 import Loading from './components/Loading'
-
-export interface Error {
-  errorMessage: string
-}
-
-export interface QuoteData {
-  author: string,
-  content: string,
-}
+import { QuoteData} from './utils/types'
 
 const App: React.FC = (): React.ReactElement => {
 

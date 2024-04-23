@@ -1,6 +1,6 @@
 import axios from 'axios'
 const baseUrl = 'https://api.quotable.io'
-import { QuoteData, Error } from '../App'
+import { QuoteData, Error } from '../utils/types'
 
 interface ApiResponse<T> {
   data: T;
