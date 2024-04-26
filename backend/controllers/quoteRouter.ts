@@ -24,4 +24,13 @@ quoteRouter.post('/quotes', async (req: express.Request, res: express.Response) 
   }
 }) 
 
+quoteRouter.get('/quotes', async (req: express.Request, res: express.Response) => {
+  try {
+    const quotes = await Quote.find({})
+    res.status(200).json(quotes)
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 export default quoteRouter

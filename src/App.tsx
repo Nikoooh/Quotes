@@ -1,45 +1,21 @@
-import { useState } from 'react'
 import './css/App.css'
-import { getQuote } from './services/quoteService'
-import Quote from './components/Quote'
-import Loading from './components/Loading'
-import { QuoteData} from './utils/types'
+import FrontPage from './components/FrontPage'
+import { Routes, Route } from 'react-router-dom'
+import FavouriteQuotes from './components/FavouritesQuotes'
+import Navbar from './components/parts/NavBar'
 
 const App: React.FC = (): React.ReactElement => {
 
-  const [quote, setQuote] = useState<QuoteData>({author: '', content: ''})
-  const [backdropOpen, setBackdropOpen] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
-  
-  const handleClick = async () => {
-    
-    setError('')
-    setQuote({author: '', content: ''})
-    setBackdropOpen(true)
-    
-    const request = await getQuote()
-     
-    if (request.status === 200) {
-      if ('author' in request.data && 'content' in request.data) {
-        setQuote(request.data);
-      }
-      setBackdropOpen(false);
-    } else if (request.status === 400) {
-      if ('errorMessage' in request.data) {
-        setError(request.data.errorMessage);
-      }
-      setBackdropOpen(false);
-    }
-  }
-
   return (
-    <div className='appContainer'>
-      <h1 className='header'>Random Quote Generator</h1>
-      <button onClick={handleClick}>Get Quote</button>   
-
-      <Quote quote={quote} error={error}/>
-
-      <Loading open={backdropOpen}/>
+    <div>
+      <Navbar /> 
+      <div className='appContainer'>          
+        <h1 className='header'>Quotes</h1>
+        <Routes>
+          <Route path='/' element={<FrontPage />} />
+          <Route path='/favourites' element={<FavouriteQuotes />} />
+        </Routes>
+      </div>
     </div>
   )
 

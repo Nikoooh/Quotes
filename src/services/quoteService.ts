@@ -25,7 +25,7 @@ export const getQuote = async (): Promise<ApiResponse<QuoteData | Error>> => {
       data: {
         errorMessage: 'Network Error. Try again later'
       },
-      status: 400
+      status: 500
     }
   } 
 } 

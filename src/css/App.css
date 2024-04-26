@@ -17,7 +17,9 @@ h2 {
 }
 
 .appContainer {
-  height: 75vh;
+  min-height: 55vh;
+  max-height: 100%;
+  margin: 8vh 0 5vh 0
 }
 
 .quoteContent {
@@ -28,7 +30,7 @@ h2 {
 }
 
 .quoteContainer {
-  margin-top: 80px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,9 +48,11 @@ h2 {
   width: fit-content;
   height: fit-content;
   transition: font-size 0.7s;
+  display: flex;
+  flex-direction: column;
 }
 
-.bi-star-fill {
+.filledStar {
   display: none;
 }
 
@@ -69,4 +73,37 @@ h2 {
 .error {
   color: rgba(192, 27, 27, 0.87);
   font-size: 1.2rem;
+}
+
+.success {
+  color: rgba(127, 255, 138, 0.87);
+  font-size: 1.2rem;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 20vw;
+  width: 60vw;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 15px rgb(31, 31, 34);
+  font-size: 1.5rem;
+}
+
+.navBtn {
+  margin-left: 20px;
+  color: --webkit-link;
+}
+
+.navBtn:hover {
+  cursor: pointer;
+}
+
+.divider {
+  border-bottom: 2px solid rgba(121, 122, 126, 0.2);
+  width: 70vw;
+  margin: auto;
+  margin-top: 1em;
 }
